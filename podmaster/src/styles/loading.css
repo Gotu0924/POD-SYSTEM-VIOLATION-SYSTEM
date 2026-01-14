@@ -1,0 +1,30 @@
+/* Loader container to align bar & percentage */
+.loader-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Space between bar and percentage */
+    margin-top: 10px;
+}
+
+/* Moving animated bar */
+.custom-loader {
+    width: 120px;
+    height: 20px;
+    -webkit-mask: linear-gradient(90deg, #2188F4 70%, #0000 0) left / 20% 100%;
+    background: 
+        linear-gradient(#2188F4 0 0) left -25% top 0 / 20% 100% no-repeat 
+        #E4E4ED;
+    animation: moveBar 3s infinite steps(6);
+}
+
+/* Percentage text */
+#percent {
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+}
+
+@keyframes moveBar {
+    100% { background-position: right -25% top 0; }
+}

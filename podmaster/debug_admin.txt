@@ -1,0 +1,10 @@
+Array
+(
+    [firstname] => test1
+    [lastname] => test1
+    [role] => admin
+    [phone] => 09912321321
+    [username] => test2
+    [gmail] => awdadas@smcbi.edu.ph
+    [password] => 123
+)
