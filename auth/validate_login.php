@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // ---------- Check Admin/Staff ----------
-    $prep = pg_prepare($conn, "admin_check", "SELECT a_username, a_password, a_role FROM t_admin WHERE a_username = $1 LIMIT 1");
+    $prep = pg_prepare($conn, "admin_check", "SELECT a_username, a_password, a_Role FROM t_admins WHERE a_username = $1 LIMIT 1");
     if (!$prep) {
         echo json_encode(['success' => false, 'message' => 'Prepare admin query failed: ' . pg_last_error($conn)]);
         exit();
@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (password_verify($password, $row['a_password'])) {
             $_SESSION['id'] = $row['a_username'];
-            $a_role = strtolower(trim($row['a_role']));
+            $a_role = strtolower(trim($row['a_Role']));
 
             // Success → return redirect target
             switch ($a_role) {
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // ---------- Check Student ----------
-    $prep = pg_prepare($conn, "student_check", "SELECT st_id, s_password FROM t_student WHERE st_id = $1 LIMIT 1");
+    $prep = pg_prepare($conn, "student_check", "SELECT st_ID, s_Password FROM t_students WHERE st_ID = $1 LIMIT 1");
     if (!$prep) {
         echo json_encode(['success' => false, 'message' => 'Prepare student query failed: ' . pg_last_error($conn)]);
         exit();
@@ -67,8 +67,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (pg_num_rows($result) > 0) {
         $row = pg_fetch_assoc($result);
 
-        if (password_verify($password, $row['s_password'])) {
-            $_SESSION['student_id'] = $row['st_id'];
+        if (password_verify($password, $row['s_Password'])) {
+            $_SESSION['student_id'] = $row['st_ID'];
             echo json_encode(['success' => true, 'redirect' => '../student/student.php']);
             exit();
         } else {
