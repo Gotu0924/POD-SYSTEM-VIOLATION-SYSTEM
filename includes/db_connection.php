@@ -1,3 +1,3 @@
 <?php
-$conn = pg_connect("host=localhost dbname=dams user=default password=secret");
+$conn = pg_connect("host=localhost dbname=dams user=default password=Yamyam0924");
 ?>

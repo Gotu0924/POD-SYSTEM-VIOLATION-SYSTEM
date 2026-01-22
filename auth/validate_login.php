@@ -14,8 +14,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // ---------- Check Admin/Staff ----------
-    pg_prepare($conn, "admin_check", "SELECT a_username, a_password, a_role FROM t_admins WHERE a_username = $1 LIMIT 1");
+    $prep = pg_prepare($conn, "admin_check", "SELECT a_username, a_password, a_role FROM t_admin WHERE a_username = $1 LIMIT 1");
+    if (!$prep) {
+        echo json_encode(['success' => false, 'message' => 'Prepare admin query failed: ' . pg_last_error($conn)]);
+        exit();
+    }
     $result = pg_execute($conn, "admin_check", array($username));
+    if (!$result) {
+        echo json_encode(['success' => false, 'message' => 'Execute admin query failed: ' . pg_last_error($conn)]);
+        exit();
+    }
 
     if (pg_num_rows($result) > 0) {
         $row = pg_fetch_assoc($result);
@@ -45,8 +53,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // ---------- Check Student ----------
-    pg_prepare($conn, "student_check", "SELECT st_id, s_password FROM t_students WHERE st_id = $1 LIMIT 1");
+    $prep = pg_prepare($conn, "student_check", "SELECT st_id, s_password FROM t_student WHERE st_id = $1 LIMIT 1");
+    if (!$prep) {
+        echo json_encode(['success' => false, 'message' => 'Prepare student query failed: ' . pg_last_error($conn)]);
+        exit();
+    }
     $result = pg_execute($conn, "student_check", array($username));
+    if (!$result) {
+        echo json_encode(['success' => false, 'message' => 'Execute student query failed: ' . pg_last_error($conn)]);
+        exit();
+    }
 
     if (pg_num_rows($result) > 0) {
         $row = pg_fetch_assoc($result);
