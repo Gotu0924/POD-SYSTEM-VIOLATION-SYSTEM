@@ -3,7 +3,7 @@
 // Set content type to JSON
 header('Content-Type: application/json');
 
-include 'db_connection.php';
+include 'includes/db_connection.php';
 // Create connection to the database
 $conn = new mysqli($servername, $username, $password, $dbname);
 

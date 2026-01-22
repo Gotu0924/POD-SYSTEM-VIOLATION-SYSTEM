@@ -1,5 +1,5 @@
 <?php
-include 'sessioning.php';
+include 'includes/sessioning.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -161,7 +161,7 @@ ul li {
                             <div class="da-card box-shadow">
                                 <div>
                                     <a href="#handbookModal" data-toggle="modal" class="open-modal">
-                                        <img src="vendors/images/section1.jpg" alt="" />
+                                        <img assets/src="assets/vendors/images/section1.jpg" alt="" />
                                     </a>
                                 </div>
                             </div>
@@ -170,7 +170,7 @@ ul li {
                             <div class="da-card box-shadow">
                                 <div>
                                     <a href="#studentGuidelinesModal" data-toggle="modal" class="open-modal">
-                                        <img src="vendors/images/section2.jpg" alt="" />
+                                        <img assets/src="assets/vendors/images/section2.jpg" alt="" />
                                     </a>
                                 </div>
                             </div>
@@ -179,7 +179,7 @@ ul li {
                             <div class="da-card box-shadow">
                                 <div>
                                     <a href="#section3Modal" data-toggle="modal" class="open-modal">
-                                        <img src="vendors/images/section3.jpg" alt="" />
+                                        <img assets/src="assets/vendors/images/section3.jpg" alt="" />
                                     </a>
                                 </div>
                             </div>
@@ -188,7 +188,7 @@ ul li {
                             <div class="da-card box-shadow">
                                 <div>
                                     <a href="#section4Modal" data-toggle="modal" class="open-modal">
-                                        <img src="vendors/images/section4.jpg" alt="" />
+                                        <img assets/src="assets/vendors/images/section4.jpg" alt="" />
                                     </a>
                                 </div>
                             </div>
@@ -197,7 +197,7 @@ ul li {
                             <div class="da-card box-shadow">
                                 <div>
                                     <a href="#section5Modal" data-toggle="modal" class="open-modal">
-                                        <img src="vendors/images/section5.jpg" alt="" />
+                                        <img assets/src="assets/vendors/images/section5.jpg" alt="" />
                                     </a>
                                 </div>
                             </div>
@@ -206,7 +206,7 @@ ul li {
                             <div class="da-card box-shadow">
                                 <div>
                                     <a href="#section6Modal" data-toggle="modal" class="open-modal">
-                                        <img src="vendors/images/section6.jpg" alt="" />
+                                        <img assets/src="assets/vendors/images/section6.jpg" alt="" />
                                     </a>
                                 </div>
                             </div>
@@ -727,11 +727,11 @@ ul li {
 
 
 <!-- js -->
-		<script src="vendors/scripts/core.js"></script>
-		<script src="vendors/scripts/script.min.js"></script>
-		<script src="vendors/scripts/process.js"></script>
-		<script src="vendors/scripts/layout-settings.js"></script>
+		<script assets/src="assets/vendors/scripts/core.js"></script>
+		<script assets/src="assets/vendors/scripts/script.min.js"></script>
+		<script assets/src="assets/vendors/scripts/process.js"></script>
+		<script assets/src="assets/vendors/scripts/layout-settings.js"></script>
 		<!-- fancybox Popup Js -->
-		<script src="src/plugins/fancybox/dist/jquery.fancybox.js"></script>
+		<script assets/src="assets/src/plugins/fancybox/dist/jquery.fancybox.js"></script>
 	</body>
 </html>

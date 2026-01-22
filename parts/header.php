@@ -173,7 +173,7 @@
     <div class="header-right">
         <div class="user-notification">
             <div class="dropdown">
-                <a class="no-arrow" href="logs.php" role="button" id="notification-icon">
+                <a class="no-arrow" href="../logs/logs.php" role="button" id="notification-icon">
                     <i class="icon-copy dw dw-notification"></i>
                     <span class="badge notification-active"></span>
                 </a>
@@ -183,7 +183,7 @@
             <div class="dropdown">
                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
                     <span class="user-icon">
-                        <img src="vendors/images/logo.png" alt="logo" />
+                        <img ../assets/src="../assets/vendors/images/logo.png" alt="logo" />
                     </span>
                     <span class="user-name"><?php echo "Welcome, " . $_SESSION['id'] ."!"; ?></span>
                 </a>
@@ -191,7 +191,7 @@
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#changePasswordModal">
                         <i class="dw dw-settings2"></i> Change Password
                     </a>
-                    <a class="dropdown-item" href="logout_admin.php?action=logout">
+                    <a class="dropdown-item" href="logout_../admin/admin.php?action=logout">
                         <i class="dw dw-logout"></i> Log Out
                     </a>
                 </div>
@@ -203,13 +203,13 @@
 let lastSanctionId = 0;
 
 function checkForNewSanction() {
-    fetch('fetch_new_sanctions.php')
+    fetch('../sanctions/fetch_new_sanctions.php')
         .then(response => response.json())
         .then(data => {
             const notificationBadge = document.querySelector('.badge.notification-active');
 
             if (data.success && data.sanctions && data.sanctions.length > 0) {
-                // Assuming fetch_new_sanctions.php returns an array of sanctions
+                // Assuming ../sanctions/fetch_new_sanctions.php returns an array of sanctions
                 // and each sanction has an i_ID
                 let unseenSanctions = data.sanctions.filter(s => s.i_ID > lastSanctionId);
 
@@ -238,8 +238,8 @@ setInterval(checkForNewSanction, 5000);
 <div class="left-side-bar">
     <div class="brand-logo">
         <a href="index3.php">
-            <img src="vendors/images/deskapp-logo.svg" alt="" class="dark-logo" />
-            <img src="vendors/images/deskapp-logo.svg" alt="" class="light-logo" />
+            <img ../assets/src="../assets/vendors/images/deskapp-logo.svg" alt="" class="dark-logo" />
+            <img ../assets/src="../assets/vendors/images/deskapp-logo.svg" alt="" class="light-logo" />
         </a>
         <div class="close-sidebar" data-toggle="left-sidebar-close">
             <i class="ion-close-round"></i>
@@ -251,7 +251,7 @@ setInterval(checkForNewSanction, 5000);
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
                         <span class="micon">
-                        <img src="vendors/images/graduates.png" alt="Students" style="width: 50px; height: 40px; vertical-align: middle;">
+                        <img ../assets/src="../assets/vendors/images/graduates.png" alt="Students" style="width: 50px; height: 40px; vertical-align: middle;">
                         </span>
                         <span class="mtext">Manage Students</span>
                     </a>
@@ -263,22 +263,22 @@ setInterval(checkForNewSanction, 5000);
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
                         <span class="micon">
-                            <img src="vendors/images/admin.png" alt="admin" style="width: 50px; height: 40px; vertical-align: middle;"></span>
+                            <img ../assets/src="../assets/vendors/images/admin.png" alt="admin" style="width: 50px; height: 40px; vertical-align: middle;"></span>
                         <span class="mtext">Manage Admin</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="admin.php">View Admin</a></li>
+                        <li><a href="../admin/admin.php">View Admin</a></li>
                         <li><a href="#" data-toggle="modal" data-target="#addAddminModal">Add Admin</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
                     <span class="micon">
-                    <img src="vendors/images/sanctions.png" alt="santions" style="width: 50px; height: 40px; vertical-align: middle;"></span>
+                    <img ../assets/src="../assets/vendors/images/sanctions.png" alt="santions" style="width: 50px; height: 40px; vertical-align: middle;"></span>
                         <span class="mtext">Manage Violation</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="sunctions.php">View Violation</a></li>
+                        <li><a href="../sanctions/sunctions.php">View Violation</a></li>
                         <li>
                             <a href="#" data-toggle="modal" data-target="#addSanctionModal">Add Violation</a>
                         </li>
@@ -288,37 +288,37 @@ setInterval(checkForNewSanction, 5000);
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
                     <span class="micon">
-                    <img src="vendors/images/guard.png" alt="hammer" style="width: 50px; height: 40px; vertical-align: middle;"></span>
+                    <img ../assets/src="../assets/vendors/images/guard.png" alt="hammer" style="width: 50px; height: 40px; vertical-align: middle;"></span>
                         <span class="mtext">Manage Guardians</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="gaurdians.php">View Guardians</a></li>
+                        <li><a href="../guardians/gaurdians.php">View Guardians</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
                     <span class="micon">
-                    <img src="vendors/images/hammer.png" alt="hammer" style="width: 50px; height: 40px; vertical-align: middle;"></span>
+                    <img ../assets/src="../assets/vendors/images/hammer.png" alt="hammer" style="width: 50px; height: 40px; vertical-align: middle;"></span>
                         <span class="mtext">Appeals</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="appeals.php">View Appeals</a></li>
+                        <li><a href="../appeals/appeals.php">View Appeals</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
                     <span class="micon">
-                    <img src="vendors/images/log.png" alt="log" style="width: 50px; height: 40px; vertical-align: middle;"></span>
+                    <img ../assets/src="../assets/vendors/images/log.png" alt="log" style="width: 50px; height: 40px; vertical-align: middle;"></span>
                         <span class="mtext">Manage Inbox</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="logs.php">View Inbox</a></li>
+                        <li><a href="../logs/logs.php">View Inbox</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
                     <span class="micon">
-                    <img src="vendors/images/regulation.png" alt="regulation" style="width: 50px; height: 40px; vertical-align: middle;"></span>
+                    <img ../assets/src="../assets/vendors/images/regulation.png" alt="regulation" style="width: 50px; height: 40px; vertical-align: middle;"></span>
                         <span class="mtext">School HandBook</span>
                     </a>
                     <ul class="submenu">
@@ -328,16 +328,16 @@ setInterval(checkForNewSanction, 5000);
                <li class="dropdown">
   <a href="javascript:;" class="dropdown-toggle">
     <span class="micon">
-      <img src="vendors/images/archive.png" alt="regulation" style="width: 50px; height: 40px; vertical-align: middle;">
+      <img ../assets/src="../assets/vendors/images/archive.png" alt="regulation" style="width: 50px; height: 40px; vertical-align: middle;">
     </span>
     <span class="mtext">Archive</span>
   </a>
   <ul class="submenu">
-    <li><a href="student_archive.php">Student Archive</a></li>
-    <li><a href="admin_archive.php">Admin Archive</a></li>
-    <li><a href="violation_archive.php">Violation Archive</a></li>
-    <li><a href="guardians_archive.php">Guardians Archive</a></li>
-    <li><a href="appeals_archive.php">Appeals Archive</a></li>
+    <li><a href="../student/student_archive.php">Student Archive</a></li>
+    <li><a href="../admin/admin_archive.php">Admin Archive</a></li>
+    <li><a href="../violations/violation_archive.php">Violation Archive</a></li>
+    <li><a href="../guardians/guardians_archive.php">Guardians Archive</a></li>
+    <li><a href="../appeals/appeals_archive.php">Appeals Archive</a></li>
   </ul>
 </li>
 
@@ -447,7 +447,7 @@ setInterval(checkForNewSanction, 5000);
         }
 
         // Make the API call to validate the current password
-        fetch("check_password_admin.php", {
+        fetch("check_password_../admin/admin.php", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: new URLSearchParams({ currentPassword })
@@ -516,7 +516,7 @@ setInterval(checkForNewSanction, 5000);
             });
 
             // AJAX request to change password
-            fetch("change_password_admin.php", {
+            fetch("change_password_../admin/admin.php", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: formData
@@ -865,7 +865,7 @@ function fetchStudentName() {
     const studentID = document.getElementById("st_ID").value.trim();
     if (studentID === "") return;
 
-    fetch("fetch_student_name.php", {
+    fetch("../student/fetch_student_name.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ st_ID: studentID })
@@ -931,7 +931,7 @@ function validateStudentID() {
     }
 
     $.ajax({
-        url: 'check_student_ids.php',
+        url: '../student/check_student_ids.php',
         method: 'POST',
         data: { student_id: studentID },
         success: function(response) {
@@ -1183,7 +1183,7 @@ function addSanction() {
         formData.set('list_Offense', otherOffense.trim());
     }
 
-    fetch('submit_sanction.php', {
+    fetch('../sanctions/submit_sanction.php', {
         method: 'POST',
         body: formData
     })
@@ -1317,7 +1317,7 @@ document.getElementById('Suspension_Type').addEventListener('change', function()
         </button>
 
         <!-- Hidden Import CSV Form -->
-        <form id="csvFormadmin" action="import_csv_admin.php" method="post" enctype="multipart/form-data" style="display:none;">
+        <form id="csvFormadmin" action="import_csv_../admin/admin.php" method="post" enctype="multipart/form-data" style="display:none;">
           <input type="file" name="csv_file" id="csvFileadmin" accept=".csv">
         </form>
 
@@ -1499,7 +1499,7 @@ function validatePasswordAdmin() {
 						<div class="modal-body text-center font-18">
 							<h3 class="mb-20">Form Submitted!</h3>
 							<div class="mb-30 text-center">
-								<img src="vendors/images/success.png" />
+								<img ../assets/src="../assets/vendors/images/success.png" />
 							</div>
 							Student and guardian added successfully!
 						</div>
@@ -1564,7 +1564,7 @@ function checkStudentID() {
     }
 
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", "check_student_id.php", true);
+    xhr.open("POST", "../student/check_student_id.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
     xhr.onreadystatechange = function () {

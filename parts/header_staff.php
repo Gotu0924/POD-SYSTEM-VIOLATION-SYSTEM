@@ -215,7 +215,7 @@
 
     // Make the AJAX request to check the current password
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "check_password.php", true);
+    xhr.open("POST", "../auth/check_password.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
     xhr.onload = function() {
@@ -226,7 +226,7 @@
                 // Password is correct, submit the form (now the password change is safe to proceed)
                 const formData = new FormData(document.getElementById("changePasswordForm"));
                 const xhrSubmit = new XMLHttpRequest();
-                xhrSubmit.open("POST", "change_password.php", true);
+                xhrSubmit.open("POST", "../auth/change_password.php", true);
                 xhrSubmit.onload = function() {
                     if (xhrSubmit.status === 200) {
                         // Trigger success modal
@@ -266,7 +266,7 @@
                         <div class="dropdown">
                             <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
                                 <span class="user-icon">
-                                    <img src="vendors/images/logo.png" alt="logo" />
+                                    <img ../assets/src="../assets/vendors/images/logo.png" alt="logo" />
                                 </span>
                                 <span class="user-name"><?php echo "Welcome, " . $_SESSION['id'] ."!"; ?></span>
                             </a>
@@ -274,7 +274,7 @@
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#changePasswordModal">
                                     <i class="dw dw-settings2"></i> Change Password
                                 </a>
-                                <a class="dropdown-item" href="logout_admin.php?action=logout">
+                                <a class="dropdown-item" href="logout_../admin/admin.php?action=logout">
                                     <i class="dw dw-logout"></i> Log Out
                                 </a>
                             </div>
@@ -287,8 +287,8 @@
 <div class="left-side-bar">
 <div class="brand-logo">
         <a href="staff.php">
-            <img src="vendors/images/deskapp-logo.svg" alt="" class="dark-logo" />
-            <img src="vendors/images/deskapp-logo.svg" alt="" class="light-logo" />
+            <img ../assets/src="../assets/vendors/images/deskapp-logo.svg" alt="" class="dark-logo" />
+            <img ../assets/src="../assets/vendors/images/deskapp-logo.svg" alt="" class="light-logo" />
         </a>
         <div class="close-sidebar" data-toggle="left-sidebar-close">
             <i class="ion-close-round"></i>
@@ -301,7 +301,7 @@
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
                         <span class="micon">
-                        <img src="vendors/images/graduates.png" alt="Students" style="width: 50px; height: 40px; vertical-align: middle;">
+                        <img ../assets/src="../assets/vendors/images/graduates.png" alt="Students" style="width: 50px; height: 40px; vertical-align: middle;">
                         </span>
                         <span class="mtext">Manage Students</span>
                     </a>
@@ -314,7 +314,7 @@
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
                     <span class="micon">
-                    <img src="vendors/images/regulation.png" alt="regulation" style="width: 50px; height: 40px; vertical-align: middle;"></span>
+                    <img ../assets/src="../assets/vendors/images/regulation.png" alt="regulation" style="width: 50px; height: 40px; vertical-align: middle;"></span>
                         <span class="mtext">Policies & Regulation</span>
                     </a>
                     <ul class="submenu">
@@ -323,9 +323,9 @@
                 </li>
 
                 <li>
-                    <a href="history.php" class="dropdown-toggle no-arrow">
+                    <a href="../logs/history.php" class="dropdown-toggle no-arrow">
                         <span class="micon">
-                            <img src="vendors/images/history.png" style="width: 50px; height: 40px; vertical-align: middle;">
+                            <img ../assets/src="../assets/vendors/images/history.png" style="width: 50px; height: 40px; vertical-align: middle;">
                         </span>
                         <span class="mtext">History</span>
                     </a>

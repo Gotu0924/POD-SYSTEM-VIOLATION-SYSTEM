@@ -2,7 +2,7 @@
 // deleteStudent.php
 
 header('Content-Type: application/json');
-require 'db_connection.php'; // Make sure this has your $conn variable
+require 'includes/db_connection.php'; // Make sure this has your $conn variable
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['studentID'])) {
     $studentID = intval($_POST['studentID']);

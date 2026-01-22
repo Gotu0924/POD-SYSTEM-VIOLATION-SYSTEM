@@ -1,5 +1,5 @@
 <?php
-include 'sessioning.php';
+include 'includes/sessioning.php';
 ?>
 <!-- Modal HTML -->
 <div id="duplicateModal" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);">
@@ -167,7 +167,7 @@ include 'sessioning.php';
             <div class="modal-body">
                 <div class="text-center mb-3">
                     <label class="font-weight-bold d-block mb-2">Student Picture</label>
-                    <img id="viewPicture" src="" alt="Student Picture" class="img-thumbnail" width="150" height="120">
+                    <img id="viewPicture" assets/src="" alt="Student Picture" class="img-thumbnail" width="150" height="120">
                 </div>
                 <table class="table table-bordered">
                     <tbody>
@@ -250,7 +250,7 @@ include 'sessioning.php';
         <div class="row">
           <!-- Left Column (Picture) -->
           <div class="col-md-3 text-center mb-3">
-            <img id="editPicture" src="" alt="Student Picture" class="img-thumbnail" style="max-width: 100%; height: auto;" />
+            <img id="editPicture" assets/src="" alt="Student Picture" class="img-thumbnail" style="max-width: 100%; height: auto;" />
           </div>
 
           <!-- Right Columns (Form) -->
@@ -443,7 +443,7 @@ include 'sessioning.php';
             return;
         }
 
-        fetch('update_student.php', {
+        fetch('update_student/student.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(updatedStudent),
@@ -614,7 +614,7 @@ include 'sessioning.php';
 <!-- Update Year Modal -->
 <div class="modal fade" id="updateYearModal" tabindex="-1" role="dialog" aria-labelledby="updateYearModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <form method="POST" action="update_year.php">
+    <form method="POST" action="includes/update_year.php">
       <div class="modal-content shadow-lg border-0 rounded">
         <div class="modal-header text-white">
           <h5 class="modal-title">Update School Year</h5>
@@ -640,7 +640,7 @@ include 'sessioning.php';
     // Close the confirmation modal
     $('#updateYearModal').modal('hide');
 
-    fetch('update_year.php', { method: 'POST' })
+    fetch('includes/update_year.php', { method: 'POST' })
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
@@ -717,23 +717,23 @@ include 'sessioning.php';
 
 		<!-- end modals-->
          <!-- Include jQuery -->
-		<script src="vendors/scripts/core.js"></script>
-		<script src="vendors/scripts/script.min.js"></script>
-		<script src="vendors/scripts/process.js"></script>
-		<script src="vendors/scripts/layout-settings.js"></script>
-		<script src="src/plugins/apexcharts/apexcharts.min.js"></script>
-		<script src="src/plugins/datatables/js/jquery.dataTables.min.js"></script>
-		<script src="src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
-		<script src="src/plugins/datatables/js/dataTables.responsive.min.js"></script>
-		<script src="src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+		<script assets/src="assets/vendors/scripts/core.js"></script>
+		<script assets/src="assets/vendors/scripts/script.min.js"></script>
+		<script assets/src="assets/vendors/scripts/process.js"></script>
+		<script assets/src="assets/vendors/scripts/layout-settings.js"></script>
+		<script assets/src="assets/src/plugins/apexcharts/apexcharts.min.js"></script>
+		<script assets/src="assets/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+		<script assets/src="assets/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+		<script assets/src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+		<script assets/src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
     
-        <script src="vendors/scripts/datatable-setting.js"></script>
+        <script assets/src="assets/vendors/scripts/datatable-setting.js"></script>
 		<!-- Datatable Setting js -->
-		<script src="vendors/scripts/datatable-setting.js"></script>
+		<script assets/src="assets/vendors/scripts/datatable-setting.js"></script>
         
 		<!-- costume  -->
-		<script src="vendors/scripts/dashboard.js"></script>
-    <script src="vendors/scripts/student_crud.js"></script>
-    <script src="vendors/scripts/addstudent.js"></script>
+		<script assets/src="assets/vendors/scripts/dashboard.js"></script>
+    <script assets/src="assets/vendors/scripts/student_crud.js"></script>
+    <script assets/src="assets/vendors/scripts/addstudent.js"></script>
 	</body>
 </html>

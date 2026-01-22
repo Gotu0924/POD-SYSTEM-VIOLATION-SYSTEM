@@ -1,5 +1,5 @@
 <?php
-include 'sessioning.php';
+include 'includes/sessioning.php';
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +59,7 @@ include 'sessioning.php';
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body" style="max-height: 500px; overflow-y: auto;">
-                  <form id="sanctionForm" method="POST" action="send_sanction.php">
+                  <form id="sanctionForm" method="POST" action="sanctions/send_sanction.php">
                     <div class="form-group">
                         <label for="st_ID">Student ID</label>
                         <input type="text" id="st_ID" class="form-control" name="st_ID" readonly />
@@ -297,9 +297,9 @@ function toggleSuspensionTypeadd() {
         }
 
         // Perform AJAX request to check if Student ID exists in the database
-        // Assuming you have a PHP file 'check_student_ids.php' that checks existence
+        // Assuming you have a PHP file 'student/check_student_ids.php' that checks existence
         $.ajax({
-            url: 'check_student_ids.php',
+            url: 'student/check_student_ids.php',
             method: 'POST',
             data: { student_id: studentID },
             success: function(response) {
@@ -514,20 +514,20 @@ function validateForm() {
 <!--view modal -->
 		<!-- end modals-->
          <!-- Include jQuery -->
-		<script src="vendors/scripts/core.js"></script>
-		<script src="vendors/scripts/script.min.js"></script>
-		<script src="vendors/scripts/process.js"></script>
-		<script src="vendors/scripts/layout-settings.js"></script>
-		<script src="src/plugins/apexcharts/apexcharts.min.js"></script>
-		<script src="src/plugins/datatables/js/jquery.dataTables.min.js"></script>
-		<script src="src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
-		<script src="src/plugins/datatables/js/dataTables.responsive.min.js"></script>
-		<script src="src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+		<script assets/src="assets/vendors/scripts/core.js"></script>
+		<script assets/src="assets/vendors/scripts/script.min.js"></script>
+		<script assets/src="assets/vendors/scripts/process.js"></script>
+		<script assets/src="assets/vendors/scripts/layout-settings.js"></script>
+		<script assets/src="assets/src/plugins/apexcharts/apexcharts.min.js"></script>
+		<script assets/src="assets/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+		<script assets/src="assets/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+		<script assets/src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+		<script assets/src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<!-- Datatable Setting js -->
-		<script src="vendors/scripts/datatable-setting.js"></script>
+		<script assets/src="assets/vendors/scripts/datatable-setting.js"></script>
 		<!-- costume  -->
-		<script src="vendors/scripts/dashboard.js"></script>
-        <script src="vendors/scripts/staff.js"></script>
-        <script src="vendors/scripts/loading.js"></script>
+		<script assets/src="assets/vendors/scripts/dashboard.js"></script>
+        <script assets/src="assets/vendors/scripts/staff.js"></script>
+        <script assets/src="assets/vendors/scripts/loading.js"></script>
 	</body>
 </html>
