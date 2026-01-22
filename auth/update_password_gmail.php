@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                        SET a_password='$hashed', reset_token=NULL, token_expiry=NULL 
                        WHERE a_ID=$a_ID";
 
-        if (mysqli_query($conn, $update_sql)) {
+        if (pg_query($conn, $update_sql)) {
             echo "<div class='alert alert-success text-center'>
                     Password updated successfully. <a href='../auth/login.php'>Login</a>
                   </div>";

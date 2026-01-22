@@ -4,10 +4,10 @@ include '../includes/db_connection.php';
 $response = ["status" => "error"]; // default
 
 $sql = "SELECT * FROM t_students";
-$result = mysqli_query($conn, $sql);
+$result = pg_query($conn, $sql);
 
 if ($result) {
-    while ($row = mysqli_fetch_assoc($result)) {
+    while ($row = pg_fetch_assoc($result)) {
         $id = $row['st_ID'];
         $schoolYear = $row['school_year'];
         $yearLevel = (int)$row['year_level'];
@@ -25,38 +25,38 @@ if ($result) {
                 if ($col === 'year_level') {
                     return "'------'";
                 }
-                return "'" . mysqli_real_escape_string($conn, $row[$col]) . "'";
+                return "'" . pg_escape_string($row[$col]) . "'";
             }, $columns);
 
             $insertSQL = "INSERT INTO st_archive (" . implode(',', $columns) . ") 
                           VALUES (" . implode(',', $values) . ")";
-            mysqli_query($conn, $insertSQL);
+            pg_query($conn, $insertSQL);
 
             // ✅ Archive Guardians also (matching st_ID)
             $guardianSQL = "SELECT * FROM t_guardians WHERE st_ID = '$id'";
-            $guardianResult = mysqli_query($conn, $guardianSQL);
+            $guardianResult = pg_query($conn, $guardianSQL);
 
-            if ($guardianResult && mysqli_num_rows($guardianResult) > 0) {
-                while ($gRow = mysqli_fetch_assoc($guardianResult)) {
+            if ($guardianResult && pg_num_rows($guardianResult) > 0) {
+                while ($gRow = pg_fetch_assoc($guardianResult)) {
                     $gColumns = ['g_ID', 'g_FirstName', 'g_LastName', 'st_ID', 'st_name', 'g_Address', 'g_PhoneNumber'];
 
                     $gValues = array_map(function($col) use ($gRow, $conn) {
-                        return "'" . mysqli_real_escape_string($conn, $gRow[$col]) . "'";
+                        return "'" . pg_escape_string($gRow[$col]) . "'";
                     }, $gColumns);
 
                     $insertGuardianSQL = "INSERT INTO guardian_archive (" . implode(',', $gColumns) . ") 
                                           VALUES (" . implode(',', $gValues) . ")";
-                    mysqli_query($conn, $insertGuardianSQL);
+                    pg_query($conn, $insertGuardianSQL);
 
                     // delete guardian after archiving
                     $deleteGuardianSQL = "DELETE FROM t_guardians WHERE g_ID = '" . $gRow['g_ID'] . "'";
-                    mysqli_query($conn, $deleteGuardianSQL);
+                    pg_query($conn, $deleteGuardianSQL);
                 }
             }
 
             // delete student after archiving
             $deleteSQL = "DELETE FROM t_students WHERE st_ID = '$id'";
-            mysqli_query($conn, $deleteSQL);
+            pg_query($conn, $deleteSQL);
 
         } else {
             // ✅ Update year level and school year
@@ -70,16 +70,16 @@ if ($result) {
                 $updateSQL = "UPDATE t_students 
                               SET school_year = '$newSchoolYear', year_level = $newYearLevel 
                               WHERE st_ID = '$id'";
-                mysqli_query($conn, $updateSQL);
+                pg_query($conn, $updateSQL);
             }
         }
     }
     $response["status"] = "success";
 } else {
     $response["status"] = "error";
-    $response["message"] = mysqli_error($conn);
+    $response["message"] = pg_last_error($conn);
 }
 
-mysqli_close($conn);
+pg_close($conn);
 echo json_encode($response);
 ?>

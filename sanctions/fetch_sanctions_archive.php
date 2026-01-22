@@ -4,11 +4,11 @@ include('../includes/db_connection.php'); // Ensure this file includes the conne
 
 // SQL query to fetch all issues (sanctions) from t_issues table
 $query = "SELECT * FROM issues_archive";
-$result = mysqli_query($conn, $query);
+$result = pg_query($conn, $query);
 
 $issues = [];
 
-while ($row = mysqli_fetch_assoc($result)) {
+while ($row = pg_fetch_assoc($result)) {
     // Append each row to the issues array
     $issues[] = $row;
 }
@@ -17,5 +17,5 @@ while ($row = mysqli_fetch_assoc($result)) {
 echo json_encode($issues);
 
 // Close the database connection
-mysqli_close($conn);
+pg_close($conn);
 ?>

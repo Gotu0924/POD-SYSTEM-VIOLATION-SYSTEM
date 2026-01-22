@@ -4,7 +4,7 @@ include '../includes/db_connection.php';
 
 header('Content-Type: application/json');
 
-if ($conn->connect_error) {
+if (!$conn) {
     echo json_encode(['success' => false, 'message' => 'Database connection failed.']);
     exit();
 }
@@ -14,18 +14,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // ---------- Check Admin/Staff ----------
-    $stmt = $conn->prepare("SELECT a_username, a_password, a_Role FROM t_admins WHERE a_username = ? LIMIT 1");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $stmt->store_result();
+    pg_prepare($conn, "admin_check", "SELECT a_username, a_password, a_role FROM t_admins WHERE a_username = $1 LIMIT 1");
+    $result = pg_execute($conn, "admin_check", array($username));
 
-    if ($stmt->num_rows > 0) {
-        $stmt->bind_result($a_username, $a_password, $a_role);
-        $stmt->fetch();
+    if (pg_num_rows($result) > 0) {
+        $row = pg_fetch_assoc($result);
 
-        if (password_verify($password, $a_password)) {
-            $_SESSION['id'] = $a_username;
-            $a_role = strtolower(trim($a_role));
+        if (password_verify($password, $row['a_password'])) {
+            $_SESSION['id'] = $row['a_username'];
+            $a_role = strtolower(trim($row['a_role']));
 
             // Success → return redirect target
             switch ($a_role) {
@@ -46,20 +43,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
     }
-    $stmt->close();
 
     // ---------- Check Student ----------
-    $stmt = $conn->prepare("SELECT st_ID, s_Password FROM t_students WHERE st_ID = ? LIMIT 1");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $stmt->store_result();
+    pg_prepare($conn, "student_check", "SELECT st_id, s_password FROM t_students WHERE st_id = $1 LIMIT 1");
+    $result = pg_execute($conn, "student_check", array($username));
 
-    if ($stmt->num_rows > 0) {
-        $stmt->bind_result($st_ID, $s_password);
-        $stmt->fetch();
+    if (pg_num_rows($result) > 0) {
+        $row = pg_fetch_assoc($result);
 
-        if (password_verify($password, $s_password)) {
-            $_SESSION['student_id'] = $st_ID;
+        if (password_verify($password, $row['s_password'])) {
+            $_SESSION['student_id'] = $row['st_id'];
             echo json_encode(['success' => true, 'redirect' => '../student/student.php']);
             exit();
         } else {
@@ -71,7 +64,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    $stmt->close();
-    $conn->close();
+    pg_close($conn);
 }
 ?>

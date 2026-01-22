@@ -9,18 +9,18 @@ if(!isset($data['userInput'])) {
     exit;
 }
 
-$userInput = mysqli_real_escape_string($conn, $data['userInput']);
+$userInput = pg_escape_string($data['userInput']);
 
 // Check if user exists
 $sql = "SELECT a_ID, a_Gmail FROM t_admin WHERE a_username='$userInput' OR a_Gmail='$userInput'";
-$result = mysqli_query($conn, $sql);
+$result = pg_query($conn, $sql);
 
-if(mysqli_num_rows($result) === 0) {
+if(pg_num_rows($result) === 0) {
     echo json_encode(['success'=>false, 'message'=>'No account found with that username or Gmail.']);
     exit;
 }
 
-$row = mysqli_fetch_assoc($result);
+$row = pg_fetch_assoc($result);
 $a_ID = $row['a_ID'];
 $email = $row['a_Gmail'];
 
@@ -29,7 +29,7 @@ $token = bin2hex(random_bytes(50));
 $expiry = date("Y-m-d H:i:s", strtotime('+30 minutes'));
 
 // Store token in DB (make sure you have reset_token and token_expiry columns)
-mysqli_query($conn, "UPDATE t_admin SET reset_token='$token', token_expiry='$expiry' WHERE a_ID='$a_ID'");
+pg_query($conn, "UPDATE t_admin SET reset_token='$token', token_expiry='$expiry' WHERE a_ID='$a_ID'");
 
 // Localhost: simulate sending email
 $resetLink = "http://localhost/podmaster/reset_password.php?token=$token"; // <-- local link

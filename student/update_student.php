@@ -1,10 +1,7 @@
 <?php
 include '../includes/db_connection.php';
 
-// Ensure the connection is established
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+
 
 $data = json_decode(file_get_contents('php://input'), true);
 
@@ -27,57 +24,32 @@ $studentID = $data['studentID']; // This variable is not used in the query, but 
 $st_ID = $data['st_ID'];
 
 // Print the SQL query for debugging purposes
-$sql = "UPDATE t_students SET 
-            s_Firstname = ?, 
-            s_Middlename = ?, 
-            s_Lastname = ?, 
-            s_DOB = ?, 
-            s_CourseOfStudy = ?, 
-            year_level = ?, 
-            school_year = ?, 
-            s_Gender = ?,
-            s_Address = ?, 
-            s_PhoneNumber = ?, 
-            religion = ?, 
-            if_licence = ?, 
-            if_licence_registration = ?, 
-            s_gmail = ?,
-            st_ID = ?
-        WHERE s_ID = ?";
+$sql = "UPDATE t_students SET
+            s_Firstname = $1,
+            s_Middlename = $2,
+            s_Lastname = $3,
+            s_DOB = $4,
+            s_CourseOfStudy = $5,
+            year_level = $6,
+            school_year = $7,
+            s_Gender = $8,
+            s_Address = $9,
+            s_PhoneNumber = $10,
+            religion = $11,
+            if_licence = $12,
+            if_licence_registration = $13,
+            s_gmail = $14,
+            st_ID = $15
+        WHERE s_ID = $16";
 
-$stmt = $conn->prepare($sql);
-if (!$stmt) {
-    die("Error preparing SQL statement: " . $conn->error);
-}
+pg_prepare($conn, "update_stmt", $sql);
 
-// Correct bind_param call
-// Types: 15 's' for strings, 1 'i' for integer (st_ID), 1 'i' for integer (id)
-$stmt->bind_param(
-    "sssssssssssssssi", 
-    $firstname, 
-    $middlename, 
-    $lastname, 
-    $dob, 
-    $course, 
-    $year_level, 
-    $school_year, 
-    $gender, 
-    $address, 
-    $phone, 
-    $religion, 
-    $licence, 
-    $licence_registration, 
-    $gmail, 
-    $st_ID, 
-    $id
-);
+$result = pg_execute($conn, "update_stmt", array($firstname, $middlename, $lastname, $dob, $course, $year_level, $school_year, $gender, $address, $phone, $religion, $licence, $licence_registration, $gmail, $st_ID, $id));
 
-if ($stmt->execute()) {
+if ($result) {
     echo json_encode(['success' => true]);
 } else {
-    echo json_encode(['error' => true]);
+    echo json_encode(['error' => pg_last_error($conn)]);
 }
-
-$stmt->close();
-$conn->close();
+pg_close($conn);
 ?>

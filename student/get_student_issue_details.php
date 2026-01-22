@@ -9,22 +9,16 @@ $studentId = $_SESSION['student_id'];
 $sql = "SELECT * FROM `t_issues` WHERE `st_ID` = ?";
 
 // Prepare the statement
-$stmt = mysqli_prepare($conn, $sql);
+pg_prepare($conn, "issues_stmt", $sql);
 
-if ($stmt) {
-    // Bind the student ID parameter
-    mysqli_stmt_bind_param($stmt, "s", $studentId);
+$result = pg_execute($conn, "issues_stmt", array($studentId));
 
-    // Execute the query
-    mysqli_stmt_execute($stmt);
-
-    // Get the result set
-    $result = mysqli_stmt_get_result($stmt);
+if ($result) {
 
     $issues = array();
-    if (mysqli_num_rows($result) > 0) {
+    if (pg_num_rows($result) > 0) {
         // Fetch all issues as an associative array
-        while ($row = mysqli_fetch_assoc($result)) {
+        while ($row = pg_fetch_assoc($result)) {
             $issues[] = $row;
         }
         // Return the issues as JSON
@@ -34,13 +28,11 @@ if ($stmt) {
         echo json_encode(array("error" => "No issues found for this student."));
     }
 
-    // Close the statement
-    mysqli_stmt_close($stmt);
 } else {
-    // Error in preparing the statement
-    echo json_encode(array("error" => "Error preparing SQL statement."));
+    // Error in executing the query
+    echo json_encode(array("error" => "Error executing SQL statement."));
 }
 
 // Close the database connection
-mysqli_close($conn);
+pg_close($conn);
 ?>

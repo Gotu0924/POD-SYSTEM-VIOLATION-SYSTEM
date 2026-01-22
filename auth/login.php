@@ -11,19 +11,19 @@
             <link
                 rel="apple-touch-icon"
                 sizes="180x180"
-                href="../assets/../assets/vendors/images/apple-touch-icon.png"
+                href="../assets/vendors/images/apple-touch-icon.png"
             />
             <link
                 rel="icon"
                 type="image/png"
                 sizes="32x32"
-                href="../assets/../assets/vendors/images/favicon-32x32.png"
+                href="../assets/vendors/images/favicon-32x32.png"
             />
             <link
                 rel="icon"
                 type="image/png"
                 sizes="16x16"
-                href="../assets/../assets/vendors/images/favicon-16x16.png"
+                href="../assets/vendors/images/favicon-16x16.png"
             />
 
             <!-- Mobile Specific Metas -->
@@ -38,22 +38,22 @@
                 rel="stylesheet"
             />
             <!-- CSS -->
-            <link rel="stylesheet" type="text/css" href="../assets/../assets/vendors/styles/core.css" />
+            <link rel="stylesheet" type="text/css" href="../assets/vendors/styles/core.css" />
             <link
                 rel="stylesheet"
                 type="text/css"
-                href="../assets/../assets/vendors/styles/icon-font.min.css"
+                href="../assets/vendors/styles/icon-font.min.css"
             />
-            <link rel="stylesheet" type="text/css" href="../assets/../assets/vendors/styles/style.css" />
+            <link rel="stylesheet" type="text/css" href="../assets/vendors/styles/style.css" />
 
             <!-- Global site tag (gtag.js) - Google Analytics -->
             <script
                 async
-                ../assets/src="https://www.googletagmanager.com/gtag/js?id=G-GBZ3SGGX85"
+                src="https://www.googletagmanager.com/gtag/js?id=G-GBZ3SGGX85"
             ></script>
             <script
                 async
-                ../assets/src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2973766580778258"
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2973766580778258"
                 crossorigin="anonymous"
             ></script>
             
@@ -86,7 +86,7 @@
 }
 
 body {
-    background-image: url("../assets/../assets/vendors/images/loginpage-image.png");
+    background-image: url("../assets/vendors/images/loginpage-image.png");
     background-size: cover;              /* Makes the image cover the whole screen */
     background-repeat: no-repeat;        /* Prevents tiling */
     background-position: center center;  /* Centers the image */
@@ -136,7 +136,7 @@ body {
                     <!-- Forgot Password Link -->
                     <div class="row mt-2">
                         <div class="col-12 text-center">
-                            <a href="../auth/forgot_password.php" class="text-primary">Forgot Password?</a>
+                            <a href="forgot_password.php" class="text-primary">Forgot Password?</a>
                         </div>
                     </div>
 
@@ -149,10 +149,10 @@ body {
 </div>
 
             <!-- js -->
-            <script ../assets/src="../assets/../assets/vendors/scripts/core.js"></script>
-            <script ../assets/src="../assets/../assets/vendors/scripts/script.min.js"></script>
-            <script ../assets/src="../assets/../assets/vendors/scripts/process.js"></script>
-            <script ../assets/src="../assets/../assets/vendors/scripts/layout-settings.js"></script>
+            <script src="../assets/vendors/scripts/core.js"></script>
+            <script src="../assets/vendors/scripts/script.min.js"></script>
+            <script src="../assets/vendors/scripts/process.js"></script>
+            <script src="../assets/vendors/scripts/layout-settings.js"></script>
 
             <script>
 document.getElementById("loginForm").addEventListener("submit", function(e) {
@@ -171,7 +171,7 @@ document.getElementById("loginForm").addEventListener("submit", function(e) {
 
     const formData = new FormData(this);
 
-    fetch("validate_../auth/login.php", {
+    fetch("validate_login.php", {
         method: "POST",
         body: formData
     })

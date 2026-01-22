@@ -18,12 +18,12 @@ if ($inputData && isset(
     $inputData['password']
 )) {
     // Sanitize input
-    $firstname = mysqli_real_escape_string($conn, $inputData['firstname']);
-    $lastname  = mysqli_real_escape_string($conn, $inputData['lastname']);
-    $role      = mysqli_real_escape_string($conn, $inputData['role']);
-    $phone     = mysqli_real_escape_string($conn, $inputData['phone']);
-    $username  = mysqli_real_escape_string($conn, $inputData['username']);
-    $password  = mysqli_real_escape_string($conn, $inputData['password']);
+    $firstname = pg_escape_string($inputData['firstname']);
+    $lastname  = pg_escape_string($inputData['lastname']);
+    $role      = pg_escape_string($inputData['role']);
+    $phone     = pg_escape_string($inputData['phone']);
+    $username  = pg_escape_string($inputData['username']);
+    $password  = pg_escape_string($inputData['password']);
 
     // Gmail is optional, but sanitize if provided
     $gmail = '';
@@ -34,14 +34,14 @@ if ($inputData && isset(
             echo json_encode(['success' => false, 'error' => 'Email must end with @smcbi.edu.ph']);
             exit;
         }
-        $gmail = mysqli_real_escape_string($conn, $gmailValue);
+        $gmail = pg_escape_string($gmailValue);
     }
 
     // Check for duplicate username
     $checkQuery = "SELECT * FROM t_admins WHERE a_username = '$username'";
-    $checkResult = mysqli_query($conn, $checkQuery);
+    $checkResult = pg_query($conn, $checkQuery);
 
-    if (mysqli_num_rows($checkResult) > 0) {
+    if (pg_num_rows($checkResult) > 0) {
         echo json_encode(['success' => false, 'error' => 'Username already taken']);
         exit;
     }
@@ -54,15 +54,15 @@ if ($inputData && isset(
               (a_Firstname, a_Lastname, a_Role, a_PhoneNumber, a_username, a_Gmail, a_password)
               VALUES ('$firstname', '$lastname', '$role', '$phone', '$username', '$gmail', '$hashedPassword')";
 
-    if (mysqli_query($conn, $query)) {
+    if (pg_query($conn, $query)) {
         echo json_encode(['success' => true]);
     } else {
-        echo json_encode(['success' => false, 'error' => 'Failed to add admin: ' . mysqli_error($conn)]);
+        echo json_encode(['success' => false, 'error' => 'Failed to add admin: ' . pg_last_error($conn)]);
     }
 
 } else {
     echo json_encode(['success' => false, 'error' => 'Invalid data received']);
 }
 
-mysqli_close($conn);
+pg_close($conn);
 ?>

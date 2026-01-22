@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_id'])) {
         echo json_encode([ 
             'success' => false, 
             'error' => 'Insert into archive failed', 
-            'mysqli_error' => $archiveStmt->error 
+            'pg_last_error' => $archiveStmt->error 
         ]);
     }
 } else {

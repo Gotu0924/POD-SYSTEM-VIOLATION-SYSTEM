@@ -38,10 +38,10 @@ if (isset($_SESSION['student_id']) && !empty($_SESSION['student_id'])) {
 
     // Query to fetch the student's image filename based on student ID
     $query = "SELECT s_PicturePath FROM t_students WHERE st_ID = '$student_id'";
-    $result = mysqli_query($conn, $query);
+    $result = pg_query($conn, $query);
 
-    if ($result && mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
+    if ($result && pg_num_rows($result) > 0) {
+        $row = pg_fetch_assoc($result);
         $student_image = $row['s_PicturePath']; // Assuming 's_PicturePath' contains the relative filename
     } else {
         // Fallback image if no image is found
@@ -49,7 +49,7 @@ if (isset($_SESSION['student_id']) && !empty($_SESSION['student_id'])) {
     }
 
     // Close the database connection
-    mysqli_close($conn);
+    pg_close($conn);
 } else {
     // If no student is logged in, you can set a default image or leave it blank
     $student_image = 'default.png'; // Change this as needed

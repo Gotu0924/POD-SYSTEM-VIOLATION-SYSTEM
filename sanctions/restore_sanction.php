@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['i_ID'])) {
     $i_ID = $_POST['i_ID'];
 
     // Sanitize input to prevent SQL injection
-    $i_ID = mysqli_real_escape_string($conn, $i_ID);
+    $i_ID = pg_escape_string($i_ID);
 
     // Start a transaction
     $conn->begin_transaction();
